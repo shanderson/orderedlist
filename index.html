@@ -1,8 +1,11 @@
 <!doctype html>
 <html ng-app="orderedlistExample">
   <head>
+    <title>Ordered List</title>
     <script defer src="ang.js"></script>
     <script defer src="orderedlist.js"></script>
+    <script defer src="angular-controller.js"></script>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body ng-controller="Controller">
     <div>
@@ -12,14 +15,29 @@
     <main>
       <input type="text" ng-model="yourName" placeholder="Enter a name here">
       <button ng-on-click="addName()">Add</button>
-      <h3>Hello {{yourName}}!</h3>
+      <h3>Hello{{ " " + yourName}}!</h3>
       <div class="dropcontainer">
         <div class="dropzone" ng-repeat="name in names.items track by $index">
-          <div class="draggablecontainer" draggable="true" data-index-number="{{$index}}" ondragstart="event.dataTransfer.setData('text/plain',null)">
+          <div  class="draggablecontainer"
+                draggable="true"
+                data-index-number="{{$index}}"
+                ondragstart="event.dataTransfer.setData('text/plain',null)">
             {{name}}
-            <button ng-on-click="moveUpOne($index)">Move up</button>
-            <button ng-on-click="moveDownOne($index)">Move down</button>
-            <button ng-on-click="deleteItem($index)">Delete</button>
+            <div class="controls">
+              <div class="stckbl">
+                <button ng-on-click="moveUpOne($index)" title="Move up" class="iconbutton stckblbutton">
+                  <div class="arrow-up"></div>
+                  <span class="hdn">move up</span>
+                </button>
+                <button ng-on-click="moveDownOne($index)" title="Move down" class="iconbutton stckblbutton">
+                  <div class="arrow-down"></div>
+                  <span class="hdn">move down</span>
+                </button>
+              </div>
+              <button ng-on-click="deleteItem($index)" title="delete" class="delete iconbutton">
+                &#x2715;<!--&#10006;&times;--><span class="hdn">delete</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -28,4 +46,4 @@
       </div>
     </main>
   </body>
-</html>
+  </html>
